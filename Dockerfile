@@ -7,5 +7,5 @@ RUN task build
 FROM alpine:3.14
 EXPOSE 5000
 
-COPY --from=build /app/output/contact /app/
-CMD [ "/app/contact" ]
+COPY --from=build /app/output/module-contact /app/
+CMD [ "/app/module-contact" ]

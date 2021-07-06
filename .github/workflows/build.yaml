@@ -29,6 +29,8 @@ jobs:
     container:
       image: ghcr.io/podkrepi-bg/go-devcontainer:v1.0.0
     steps:
+      - uses: actions/checkout@v2
+      
       - name: Test
         run: task test
         
