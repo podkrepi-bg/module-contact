@@ -42,3 +42,13 @@ Testing:
 ```bash
 task test
 ```
+
+## Deployment
+To deploy the module you first need to make sure there is a schema called `contact` created. Preferrably create a user that has access only to this schema. You can do that with the following script:
+```sql
+CREATE SCHEMA contact;
+CREATE USER module_contact WITH ENCRYPTED PASSWORD 'secretpass';
+GRANT ALL PRIVILEGES ON SCHEMA contact TO module_contact;
+```
+
+You can then deploy with the Kubernetes manifests located in the `manifests` folder in this repo.

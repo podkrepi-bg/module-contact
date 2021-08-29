@@ -34,8 +34,8 @@ jobs:
       - name: Test
         run: task test
         
-  build-docker-image:
-    name: Build docker image
+  build-module-docker-image:
+    name: Build module docker image
     runs-on: ubuntu-latest
     needs: test
     steps:
@@ -57,3 +57,28 @@ jobs:
         with:
           push: true
           tags: ghcr.io/podkrepi-bg/module-contact:${{ steps.vars.outputs.tag }}
+
+  build-migrations-docker-image:
+    name: Build migrations docker image
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to GitHub Packages Docker Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: devops-podkrepi-bg
+          password: ${{ secrets.DEVOPS_PACKAGES_TOKEN }}
+
+      - name: Get tag
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: database/migrations
+          push: true
+          tags: ghcr.io/podkrepi-bg/module-contact-flyway:${{ steps.vars.outputs.tag }}

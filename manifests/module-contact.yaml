@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: module-contact
+  namespace: contact
+  labels:
+    app: module-contact
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: module-contact
+  template:
+    metadata:
+      labels:
+        app: module-contact
+    spec:
+      initContainers:
+      - name: migrate-database
+        image: ghcr.io/podkrepi-bg/module-contact-flyway:v0.1.0
+        env:
+        - name: FLYWAY_URL
+          value: jdbc:postgresql://postgresql-headless.postgresql:5432/podkrepibg
+        - name: FLYWAY_USER
+          value: module_contact
+        - name: FLYWAY_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db
+              key: password
+        - name: FLYWAY_SCHEMAS
+          value: contact
+        args:
+          - migrate
+      containers:
+      - name: module-contact
+        image: ghcr.io/podkrepi-bg/module-contact:v0.1.0
+        env:
+        - name: DB_HOST
+          value: postgresql-headless.postgresql
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          value: module_contact
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: db
+              key: password
+        - name: DB_NAME
+          value: podkrepibg
+        ports:
+        - containerPort: 80

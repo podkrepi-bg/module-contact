@@ -5,7 +5,8 @@ COPY . /app
 RUN task build
 
 FROM alpine:3.14
-EXPOSE 5000
+ENV APP_ADDR :80
+EXPOSE 80
 
 COPY --from=build /app/output/module-contact /app/
 CMD [ "/app/module-contact" ]

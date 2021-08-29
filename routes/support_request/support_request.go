@@ -18,7 +18,7 @@ type Tabler interface {
 
 // TableName overrides
 func (SupportRequest) TableName() string {
-	return "app.support_requests"
+	return "contact.support_requests"
 }
 
 type SupportRequest struct {
