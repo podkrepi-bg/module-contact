@@ -6,7 +6,7 @@ To deploy the module make sure you do the following:
 
 After that run:
 ```bash
-kubectl create namespace contact
+kubectl create namespace podkrepi-contact
 kubectl apply -f db-secret.yaml
 kubectl apply -f module-contact.yaml
 ```
