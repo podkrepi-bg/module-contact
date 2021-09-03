@@ -1,4 +1,4 @@
-# Podkrepi.bg graphql-gateway
+# Podkrepi.bg module-contact
 The contact module used by Podkrepi.bg. The module requires a PostgreSQL-compliant database for storing the contact information.
 
 ## Configuration
