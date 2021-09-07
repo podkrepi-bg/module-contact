@@ -1,5 +1,5 @@
-# Podkrepi.bg module-contact
-The contact module used by Podkrepi.bg. The module requires a PostgreSQL-compliant database for storing the contact information.
+# Podkrepi.bg Module Contact
+The contact module used by Podkrepi.bg. The module requires a PostgreSQL-compliant database for storing the contact information. For more information see [overall architecture](https://docs.podkrepi.bg/general/arkhitektura/architecture) and [Module Contact](https://docs.podkrepi.bg/general/otdeli/tech-team/module-contact).
 
 ## Configuration
 The configuration settings for the contact module are set via environmental variables. Each of them is described in the table below.
